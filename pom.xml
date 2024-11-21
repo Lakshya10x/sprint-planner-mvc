@@ -41,25 +41,20 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+
+		<!-- Tomcat Embed -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<!--<scope>provided</scope>-->
 		</dependency>
 
-			<!-- JSP Support -->
-			<dependency>
-				<groupId>org.apache.tomcat.embed</groupId>
-				<artifactId>tomcat-embed-jasper</artifactId>
-				<scope>provided</scope>
-			</dependency>
+		<!-- To compile JSP files -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+<!--			<scope>provided</scope>-->
 		</dependency>
-
-
 	</dependencies>
 
 	<build>

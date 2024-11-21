@@ -58,6 +58,11 @@ SprintPlanner is a sprint and task management application designed to help users
 - Data persistence is handled using Spring Data JPA.
 
 ---
+## Troubleshooting JSP 404 Errors in Spring Boot
+
+If you encounter a `404 Not Found` error or the Whitelabel Error Page when trying to load a JSP page in a Spring Boot application, refer to the following Stack Overflow discussion for solutions and best practices:
+
+[Spring Boot JSP 404 Whitelabel Error Page](https://stackoverflow.com/questions/43847924/spring-boot-jsp-404-whitelabel-error-page)
 
 
 

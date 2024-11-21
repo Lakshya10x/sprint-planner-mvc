@@ -51,6 +51,13 @@ public class GreetingsController {
         Folder : src/main/resources/META-INF/resources/WEB-INF/jsp/GreetingsPage.jsp
         "jsp" folder -> View Folder & "GreetingsPage.jsp" -> View File
 
+        Review :
+        1. Sending request to /greetings-jsp
+        2. Handled by GreetingsController
+        3. greetingsJsp methods is mapped/handling the request to this URL
+        4. It is returned Name of JSP
+        5. Spring MVC makes use of "View Resolver" & view resolver is configured in application.properties by prefix and suffix
+        6. Finally the request is then redirected to this specific Jsp.
      */
 
     @RequestMapping("greetings-jsp")
