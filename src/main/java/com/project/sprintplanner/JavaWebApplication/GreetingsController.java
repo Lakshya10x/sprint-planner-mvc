@@ -44,4 +44,21 @@ public class GreetingsController {
 
         return sb.toString();
     }
+
+    /**
+        Even with HTML - things are getting complex -> For Building web applications -> Go For "Views"
+        Most popular / Earliest view technology is "JSP" -> "Java-Server-Pages"
+        Folder : src/main/resources/META-INF/resources/WEB-INF/jsp/GreetingsPage.jsp
+        "jsp" folder -> View Folder & "GreetingsPage.jsp" -> View File
+
+     */
+
+    @RequestMapping("greetings-jsp")
+    public String greetingsJsp()
+    {
+        return "GreetingsPage";
+        //      JSP Name / View Name -> Name is changing mostly, that's why we want to store the constant part in properties file.
+    }
+
+
 }
