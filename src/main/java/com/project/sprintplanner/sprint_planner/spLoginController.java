@@ -8,6 +8,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class spLoginController {
+    private AuthenticationService authService;
+
+    public spLoginController(AuthenticationService authService)
+    {
+        super();
+        this.authService = authService;
+    }
 
     /**
         Entering name and password -> the values will be going as part of our query parameter.
@@ -37,9 +44,14 @@ public class spLoginController {
                                     @RequestParam String password,
                                     ModelMap modelMap)
     {
-        modelMap.put("name",name);
-        modelMap.put("password",password);
-        return "GreetingsPage";
+        if(authService.authenticate(name,password))
+        {
+            modelMap.put("name",name);
+            modelMap.put("password",password);
+            return "GreetingsPage";
+        }
+        modelMap.put("errorMessage","Invalid Credentials, Try Again !!");
+        return "LoginPage";
     }
 
 }
