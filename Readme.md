@@ -65,5 +65,26 @@ If you encounter a `404 Not Found` error or the Whitelabel Error Page when tryin
 [Spring Boot JSP 404 Whitelabel Error Page](https://stackoverflow.com/questions/43847924/spring-boot-jsp-404-whitelabel-error-page)
 
 
+## Spring MVC Front Controller - Dispatcher Servlet
+
+It is a Spring MVC implementation of the Model-2 Front Controller Pattern
+
+### How does dispatcher servlet works ?
+
+It is the one which access the "Front Controller"
+So, all the requests are received by "Dispatcher Servlet".
+
+A. Receive HTTP Request
+B. Processes HTTP Request -> (To process, it's use model,view & controller (MVC))
+    B1. Identifies correct Controller method
+        - Based on request URL
+    B2. Executes Controller method
+        - Returns Model & View name
+    B3. Identifies correct view
+        - By using "View Resolver", configuring prefix and suffix
+    B4. Executes View
+C. Return HTTP Response (View/JSP sent back as a response to the browser)
+
+At a high level, this is the entire flow which happens for each request.
 
 

@@ -7,7 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller
+//@Controller
 public class LoginController {
 
     /**
@@ -51,5 +51,4 @@ public class LoginController {
         // By SOP, you cannot configure the level's or anything like that
         return "LoginPage";
     }
-
 }
