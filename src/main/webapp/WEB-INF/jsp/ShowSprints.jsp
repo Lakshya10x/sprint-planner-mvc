@@ -11,11 +11,11 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #1a237e, #283593);
-            color: #ffffff;
+            background: linear-gradient(135deg, #f5f5f5, #e8eaf6);
+            color: #333333;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
         }
 
@@ -24,32 +24,22 @@
             color: #333333;
             border-radius: 12px;
             padding: 40px 30px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             max-width: 90%;
             width: 100%;
         }
 
         h1 {
-            color: #283593;
+            color: #1e88e5;
             margin-bottom: 30px;
             text-transform: uppercase;
             text-align: center;
             font-weight: bold;
         }
 
-        table th {
-            background-color: #5a9bfc;
-            color: white;
-            text-transform: uppercase;
-        }
-
-        table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
         .table-container {
-            max-height: 400px; /* Adjust the max-height as needed */
-            overflow-y: auto; /* Enables vertical scrolling */
+            max-height: 400px;
+            overflow-y: auto;
             margin-bottom: 20px;
         }
 
@@ -57,7 +47,7 @@
             display: block;
             width: 100%;
             padding: 10px;
-            background-color: #5a9bfc;
+            background-color: #1976d2;
             color: #ffffff;
             text-align: center;
             text-decoration: none;
@@ -67,53 +57,86 @@
         }
 
         .btn:hover {
-            background-color: #283593;
+            background-color: #1565c0;
         }
 
         .btn-submit {
             max-width: 200px;
             margin: 0 auto;
         }
+
+        .btn-warning {
+            background-color: #ff7043;
+            color: #ffffff;
+        }
+
+        .btn-warning:hover {
+            background-color: #e64a19;
+        }
+
+        .btn-success {
+            background-color: #66bb6a;
+            color: #ffffff;
+        }
+
+        .btn-success:hover {
+            background-color: #388e3c;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <%@ include file="common/Navigation.jspf" %>
+
+    <div class="container mt-4">
         <h1>Welcome, ${name}!</h1>
         <p class="text-center">Here is a list of your current sprints:</p>
 
         <!-- Table Container with Scroll -->
         <div class="table-container">
             <table class="table table-bordered">
-                <thead class="table-dark">
+                <thead class="table-light">
                     <tr>
-                        <th>ID</th>
-                        <th>Username</th>
-                        <th>Sprint Name</th>
-                        <th>Goal</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Status</th>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Username</th>
+                        <th class="text-center">Sprint Name</th>
+                        <th class="text-center">Goal</th>
+                        <th class="text-center">Start Date</th>
+                        <th class="text-center">End Date</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach items="${sprints}" var="sprint">
                         <tr>
-                            <td>${sprint.id}</td>
-                            <td>${sprint.username}</td>
-                            <td>${sprint.sprintName}</td>
-                            <td>${sprint.goal}</td>
-                            <td>${sprint.startDate}</td>
-                            <td>${sprint.endDate}</td>
-                            <td>${sprint.status ? 'Completed' : 'Pending'}</td>
+                            <td class="text-center">${sprint.id}</td>
+                            <td class="text-center">${sprint.username}</td>
+                            <td class="text-center">${sprint.sprintName}</td>
+                            <td class="text-center">${sprint.goal}</td>
+                            <td class="text-center">${sprint.startDate}</td>
+                            <td class="text-center">${sprint.endDate}</td>
+                            <td class="text-center">${sprint.status ? 'Completed' : 'In-Progress'}</td>
+                            <td class="text-center">
+                                <div class="d-flex justify-content-center">
+                                    <a href="update-sprint?id=${sprint.id}" class="btn btn-sm mx-1">
+                                        <i class="bi bi-pencil"></i> Edit
+                                    </a>
+                                    <a href="delete-sprint?id=${sprint.id}" class="btn btn-sm mx-1">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </a>
+
+                                </div>
+                            </td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
         </div>
 
+
+
         <a href="add-sprint" class="btn btn-submit">Add Sprint</a>
     </div>
 </body>
-<script src="webjars/bootstrap/5.3.3/js/bootstrap.min.js"></script>
-<script src="webjars/jquery/3.7.1/jquery.min.js"></script>
+<%@ include file="common/Footer.jspf" %>
 </html>

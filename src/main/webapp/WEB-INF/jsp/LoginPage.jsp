@@ -87,7 +87,7 @@
 </head>
 <body>
     <form method="post">
-        <h1>SprintPlanner Login</h1>
+        <h1>Sprint Planner Login</h1>
         <pre>${errorMessage}</pre>
         <label for="name">Username:</label>
         <input type="text" id="name" name="name" placeholder="Enter your username" required>

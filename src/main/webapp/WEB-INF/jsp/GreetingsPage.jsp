@@ -16,8 +16,8 @@
             align-items: center;
             flex-direction: column;
             height: 100vh;
-            background: linear-gradient(135deg, #1a237e, #283593); /* Dark Blue Gradient */
-            color: #e0e0e0; /* Light text color */
+            background: linear-gradient(135deg, #f5f5f5, #e8eaf6); /* Light Blue Gradient */
+            color: #333333; /* Dark text color for contrast */
         }
 
         /* Header Styling */
@@ -32,10 +32,32 @@
         /* Paragraph Styling */
         p {
             font-size: 18px;
-            color: #cfd8dc; /* Light gray-blue for contrast */
+            color: #555555; /* Darker gray for better readability */
             max-width: 600px;
             line-height: 1.6;
             text-align: center;
+        }
+
+        /* Button Styling */
+        a {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #5a9bfc; /* Soft blue background */
+            color: #fff; /* White text color */
+            font-size: 18px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 6px; /* Rounded corners */
+            margin-top: 20px;
+            transition: all 0.3s ease-in-out; /* Smooth transition on hover */
+        }
+
+        /* Button Hover Effect */
+        a:hover {
+            background-color: ##5a9bfc;
+            color: #fff; /* Keep text white */
+            text-decoration: none; /* Remove underline */
+            transform: scale(1.05); /* Slight zoom effect */
         }
 
         /* Responsive Design */
@@ -56,6 +78,5 @@
     <p>Welcome to SprintPlanner! Stay productive and take charge of your tasks with a clear focus and planning.</p>
     <a href="show-sprints">View Sprints</a>
 </body>
-<script src="webjars/bootstrap/5.3.3/js/bootstrap.min.js"></script>
-<script src="webjars/jquery/3.7.1/jquery.min.js"></script>
+<%@ include file="common/Footer.jspf" %>
 </html>

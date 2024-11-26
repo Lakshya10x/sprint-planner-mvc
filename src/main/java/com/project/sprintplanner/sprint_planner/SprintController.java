@@ -101,9 +101,42 @@ public class SprintController {
             return "NewSprint";
         }
         String username = (String) modelMap.get("name");
-        System.out.println(sprint);
         sprintService.addSprint(username,sprint.getSprintName(),sprint.getGoal(),sprint.getStartDate(),sprint.getEndDate(),sprint.isStatus());
         return "redirect:show-sprints";
     }
+
+    /**
+        To send the id which we want to delete as part of our href in "ShowSprints" page as a part of our URL
+        Use -> Query Parameter (Because id is not sensitive data) : delete-sprint?id=${sprint.id}
+     */
+
+    @RequestMapping("delete-sprint")
+    public String deleteSprint(@RequestParam int id)
+    {
+        sprintService.deleteById(id);
+        return "redirect:show-sprints";
+    }
+
+    @RequestMapping(value = "update-sprint",method = RequestMethod.GET)
+    public String showUpdateSprintPage(@RequestParam int id, ModelMap modelMap)
+    {
+        Sprint sprint = sprintService.findById(id);
+        modelMap.addAttribute(sprint);
+        return "NewSprint";
+    }
+
+    @RequestMapping(value = "update-sprint", method = RequestMethod.POST)
+    public String updateSprint(ModelMap modelMap,@Valid Sprint sprint, BindingResult result)
+    {
+        if(result.hasErrors())
+        {
+            return "NewSprint";
+        }
+        String username = (String) modelMap.get("name");
+        sprint.setUsername(username);
+        sprintService.updateSprint(sprint);
+        return "redirect:show-sprints";
+    }
+
 
 }

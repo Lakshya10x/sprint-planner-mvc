@@ -1,10 +1,12 @@
 package com.project.sprintplanner.sprint_planner;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 @Service
 public class SprintService {
@@ -27,4 +29,21 @@ public class SprintService {
         return sprints;
     }
 
+    public void deleteById(int id) {
+
+        Predicate<? super Sprint> predicate = sprint -> sprint.getId()==id;
+        sprints.removeIf(predicate);
+    }
+
+
+    public Sprint findById(int id) {
+        Predicate<? super Sprint> predicate = sprint -> sprint.getId()==id;
+        Sprint sprint = sprints.stream().filter(predicate).findFirst().get();
+        return sprint;
+    }
+
+    public void updateSprint(@Valid Sprint sprint) {
+        deleteById(sprint.getId());
+        sprints.add(sprint);
+    }
 }

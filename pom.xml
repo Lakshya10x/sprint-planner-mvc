@@ -94,6 +94,13 @@
 			<version>3.4.0</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.webjars/bootstrap-datepicker -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap-datepicker</artifactId>
+			<version>1.10.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
