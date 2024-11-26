@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="webjars/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Greetings</title>
@@ -53,5 +54,8 @@
 <body>
     <h1>Hello, ${name}!</h1>
     <p>Welcome to SprintPlanner! Stay productive and take charge of your tasks with a clear focus and planning.</p>
+    <a href="show-sprints">View Sprints</a>
 </body>
+<script src="webjars/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+<script src="webjars/jquery/3.7.1/jquery.min.js"></script>
 </html>

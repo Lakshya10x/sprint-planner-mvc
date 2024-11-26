@@ -1,0 +1,42 @@
+Earlier :-
+        Download bootstrap css file
+        Put it into static folder
+
+New Process :-
+        Use Webjars dependency.
+
+        <!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
+        		<dependency>
+        			<groupId>org.webjars</groupId>
+        			<artifactId>bootstrap</artifactId>
+        			<version>5.3.3</version>
+        		</dependency>
+
+        		<!-- https://mvnrepository.com/artifact/org.webjars/jquery -->
+        		<dependency>
+        			<groupId>org.webjars</groupId>
+        			<artifactId>jquery</artifactId>
+        			<version>3.7.1</version>
+        		</dependency>
+
+
+Note - Until now we didn't add versions, coz versions are managed by spring-boot-starter-parent
+However - In case of static content, all these versions are not managed by spring-boot-starter-parent
+
+Open Maven Dependencies > Copy these below paths of minimized bootstrap css & js file.
+
+Don't need to specify : META-INF/resources/
+
+Use this only -> webjars/bootstrap/5.3.3/css/bootstrap.min.css
+
+Top : Right below the <head>
+    <link href="webjars/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+
+Bottom : Right below the </body>
+
+    <script src="webjars/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+    <script src="webjars/jquery/3.7.1/jquery.min.js"></script>
+
+Cross-checking : Network > Doc (show-sprints) : Refresh
+In Response you can be able to see these 3 files
+
