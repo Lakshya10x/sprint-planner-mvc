@@ -87,4 +87,32 @@ C. Return HTTP Response (View/JSP sent back as a response to the browser)
 
 At a high level, this is the entire flow which happens for each request.
 
+---
+## Meaning of Encoded and Decoded in Password Context:
+### Encoding:
 
+Encoding is a process of converting data (like a password) into a different format so it can be safely transmitted or stored. It’s not meant for security but to ensure compatibility between systems.
+Example: When you send a password over a network, it might be encoded in Base64 to avoid issues with special characters.
+Example:
+
+Original password: MyP@ssword123
+Encoded in Base64: TXlQQHNzd29yZDEyMw==
+If you decode this back, you'll get MyP@ssword123 again.
+
+### Decoding:
+
+Decoding is the process of converting the encoded data back to its original form.
+Important: Encoding and decoding don’t protect your password from attackers because they can reverse the process if they know the encoding method.
+More Secure Concept: Hashing (Not Reversible)
+In password handling, hashing is commonly used instead of encoding:
+
+Hashing converts a password into a unique, fixed-length string.
+Hashing cannot be reversed (unlike encoding).
+Example: Using the SHA-256 algorithm:
+Original: MyP@ssword123
+Hashed: c04d1a2b93b8fa49c3f8a86e9a7a1d1e6d12c92...
+Even if someone gets the hashed value, they can’t easily reverse it to find the original password.
+
+##Summary:
+Encoding/Decoding: Changes the format for compatibility, but is reversible.
+Hashing: Secures passwords by making them impossible to reverse, which is what websites usually use for storing passwords.

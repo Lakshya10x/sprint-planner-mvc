@@ -1,4 +1,4 @@
-package com.project.sprintplanner.sprint_planner;
+package com.project.sprintplanner.sprint_planner.sprint;
 
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;

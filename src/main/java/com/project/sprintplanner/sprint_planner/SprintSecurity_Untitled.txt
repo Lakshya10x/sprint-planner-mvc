@@ -1,0 +1,20 @@
+Setting up Spring security with Spring Boot Starter Security :
+
+<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+    <version>3.4.0</version>
+</dependency>
+
+Note :- If still you can see error, then make a small change in pom.xml and rerun the application.
+
+After adding above dependency, all the URL's are protected.
+Username - user
+Password - System generated console log password (Using generated security password: 544e27a9-b4c4-4b45-9e65-e8cb9745c900)
+
+The user we are logging in with spring security is diff from the user we are using in our application.
+
+-------------------------------------------
+Configure Custom User and Password Encoder  :- SpringSecurityConfiguration class
+

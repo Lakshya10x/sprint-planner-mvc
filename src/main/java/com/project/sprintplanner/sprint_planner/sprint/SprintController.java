@@ -1,7 +1,8 @@
-package com.project.sprintplanner.sprint_planner;
+package com.project.sprintplanner.sprint_planner.sprint;
 
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -26,9 +27,8 @@ public class SprintController {
     @RequestMapping(value = "show-sprints")
     public String showAllSprints(ModelMap modelMap)
     {
-        String name = (String) modelMap.get("name");
+        String name = getLoggedInUsername(modelMap);
         List<Sprint> sprints = sprintService.findByUsername(name);
-        modelMap.put("name",name);
         modelMap.put("sprints",sprints);
         return "ShowSprints";
     }
@@ -42,10 +42,10 @@ public class SprintController {
     @RequestMapping(value = "add-sprint",method = RequestMethod.GET)
     public String showNewSprintPage(ModelMap modelMap)
     {
-//        String username = (String) modelMap.get("name");
-//        Sprint sprint1 = new Sprint(null,username,"Hover Menu","",LocalDate.now().plusYears(1),LocalDate.now().plusDays(2),false);
-//        modelMap.put("sprint",sprint1);
-        modelMap.addAttribute("sprint",new Sprint());
+        String username = (String) modelMap.get("name");
+        Sprint sprint1 = new Sprint(null,username,"","", LocalDate.now(),LocalDate.now(),false);
+        modelMap.put("sprint",sprint1);
+//        modelMap.addAttribute("sprint",new Sprint());
         return "NewSprint";
     }
 //    @RequestMapping(value = "add-sprint",method = RequestMethod.GET)
@@ -100,7 +100,7 @@ public class SprintController {
         {
             return "NewSprint";
         }
-        String username = (String) modelMap.get("name");
+        String username = getLoggedInUsername(modelMap);
         sprintService.addSprint(username,sprint.getSprintName(),sprint.getGoal(),sprint.getStartDate(),sprint.getEndDate(),sprint.isStatus());
         return "redirect:show-sprints";
     }
@@ -132,10 +132,15 @@ public class SprintController {
         {
             return "NewSprint";
         }
-        String username = (String) modelMap.get("name");
+        String username = getLoggedInUsername(modelMap);
         sprint.setUsername(username);
         sprintService.updateSprint(sprint);
         return "redirect:show-sprints";
+    }
+
+    private String getLoggedInUsername(ModelMap modelMap) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName();
     }
 
 

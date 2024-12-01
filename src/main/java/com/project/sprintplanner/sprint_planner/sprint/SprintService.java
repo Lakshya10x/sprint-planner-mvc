@@ -1,4 +1,4 @@
-package com.project.sprintplanner.sprint_planner;
+package com.project.sprintplanner.sprint_planner.sprint;
 
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
@@ -14,9 +14,9 @@ public class SprintService {
     private static int sprintCount =0;
     private static List<Sprint> sprints = new ArrayList<>();
     static {
-            sprints.add(new Sprint(1,"Lakshya","Hamburger-Menu","Reflects the Sprint-Planner application's functionalities and sub-functionalities under the hood", LocalDate.now().plusDays(2),LocalDate.now().plusMonths(1),false));
-            sprints.add(new Sprint(2,"Madhav","Dynamic Design","Upgrade the website's design dynamically", LocalDate.now().plusDays(10),LocalDate.now().plusMonths(1),false));
-
+            sprints.add(new Sprint(1,"ram","Hamburger-Menu","Reflects the Sprint-Planner application's functionalities and sub-functionalities under the hood", LocalDate.now().plusDays(2),LocalDate.now().plusMonths(1),false));
+            sprints.add(new Sprint(2,"ram","Dynamic Design","Upgrade the website's design dynamically", LocalDate.now().plusDays(10),LocalDate.now().plusMonths(1),false));
+            sprints.add(new Sprint(3,"radha","Dynamic Design","Upgrade the website's design dynamically", LocalDate.now().plusDays(10),LocalDate.now().plusMonths(1),false));
     }
 
     public void addSprint(String username, String sprintName, String goal, LocalDate startDate, LocalDate endDate, boolean status)
@@ -26,7 +26,9 @@ public class SprintService {
     }
     public List<Sprint> findByUsername(String username)
     {
-        return sprints;
+
+        Predicate<? super Sprint> predicate = sprint -> sprint.getUsername().equalsIgnoreCase(username);
+        return sprints.stream().filter(predicate).toList();
     }
 
     public void deleteById(int id) {

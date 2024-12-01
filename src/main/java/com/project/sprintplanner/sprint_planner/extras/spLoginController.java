@@ -1,14 +1,12 @@
-package com.project.sprintplanner.sprint_planner;
+package com.project.sprintplanner.sprint_planner.extras;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
-@Controller
-@SessionAttributes("name")
+//@Controller
+//@SessionAttributes("name")
 public class spLoginController {
     private AuthenticationService authService;
 

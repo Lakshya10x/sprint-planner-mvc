@@ -100,6 +100,13 @@
 			<artifactId>bootstrap-datepicker</artifactId>
 			<version>1.10.0</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+			<version>3.4.0</version>
+		</dependency>
+
 
 	</dependencies>
 

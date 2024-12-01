@@ -1,8 +1,6 @@
-package com.project.sprintplanner.sprint_planner;
+package com.project.sprintplanner.sprint_planner.extras;
 
-import org.springframework.stereotype.Service;
-
-@Service
+//@Service
 public class AuthenticationService {
     public boolean authenticate(String username, String password)
     {
