@@ -1,0 +1,46 @@
+JPA allows us to map your bean to the database(to the table in the database)
+
+Auto-Configuration : If it sees any entities,then it would automatically start creating tables in H2, it would start pre-configuring it.
+
+JPA also supports mapping complex relationship
+one to one
+one to many
+many to one
+many to many
+
+H2 Database : It is an in-memory database, when u restart the application, all the data will be lost.
+Populating some data to start off : data.sql
+BUT -> By default : data.sql is executed before the entities are processed, tables are created when the entities are processed.
+Hence -> spring.jpa.defer-datasource-initialization=true
+
+Create a new Repository to do all the operations on sprint
+Repository -> Allow you to perform actions on entities.
+
+Now, instead of talking with service (static list), we would talk to table in database using JPA
+
+Application
+    |
+    \/
+Spring Data JPA
+    |
+    \/
+    JPA
+    |
+    \/
+   Database
+
+We are talking to in-memory database H2 from our spring boot application & we are talking through Spring data JPA
+Spring data JPA underneath make use of JPA & we are talking to database.
+
+Spring Boot Auto-Configuration does some magic :-
+* Initialize JPA and Spring Data JPA framework
+* Launch an in-memory database(H2)
+* Setup connection from appln to in-memory database
+* Launch a few scripts at startup (ex ; data.sql)
+
+In background :-
+Once you call SprintRepository, what queries are generated ?
+
+spring.jpa.show-sql = true
+
+For id field (It should be auto-generated & this happened using a sequence)

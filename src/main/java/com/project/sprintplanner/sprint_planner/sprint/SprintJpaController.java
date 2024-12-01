@@ -4,7 +4,6 @@ import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -12,24 +11,24 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
-//@Controller
-//@SessionAttributes("name")
-public class SprintController {
+@Controller
+@SessionAttributes("name")
+public class SprintJpaController {
 
-    private SprintService sprintService;
+   private SprintRepository sprintRepo;
 
-    public SprintController(SprintService sprintService)
-    {
-        super();
-        this.sprintService = sprintService;
-    }
+   public SprintJpaController(SprintRepository sprintRepo)
+   {
+       super();
+       this.sprintRepo= sprintRepo;
+   }
 
     @RequestMapping(value = "show-sprints")
     public String showAllSprints(ModelMap modelMap)
     {
         String name = getLoggedInUsername(modelMap);
-        List<Sprint> sprints = sprintService.findByUsername(name);
-        modelMap.put("sprints",sprints);
+        List<Sprint> sprints = sprintRepo.findByUsername(name);
+        modelMap.addAttribute("sprints",sprints);
         return "ShowSprints";
     }
 
@@ -101,7 +100,8 @@ public class SprintController {
             return "NewSprint";
         }
         String username = getLoggedInUsername(modelMap);
-        sprintService.addSprint(username,sprint.getSprintName(),sprint.getGoal(),sprint.getStartDate(),sprint.getEndDate(),sprint.isStatus());
+        sprint.setUsername(username);
+        sprintRepo.save(sprint);
         return "redirect:show-sprints";
     }
 
@@ -113,14 +113,14 @@ public class SprintController {
     @RequestMapping("delete-sprint")
     public String deleteSprint(@RequestParam int id)
     {
-        sprintService.deleteById(id);
+        sprintRepo.deleteById(id);
         return "redirect:show-sprints";
     }
 
     @RequestMapping(value = "update-sprint",method = RequestMethod.GET)
     public String showUpdateSprintPage(@RequestParam int id, ModelMap modelMap)
     {
-        Sprint sprint = sprintService.findById(id);
+        Sprint sprint = sprintRepo.findById(id).get();
         modelMap.addAttribute(sprint);
         return "NewSprint";
     }
@@ -134,7 +134,7 @@ public class SprintController {
         }
         String username = getLoggedInUsername(modelMap);
         sprint.setUsername(username);
-        sprintService.updateSprint(sprint);
+        sprintRepo.save(sprint);
         return "redirect:show-sprints";
     }
 

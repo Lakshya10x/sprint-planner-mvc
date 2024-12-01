@@ -1,16 +1,21 @@
 package com.project.sprintplanner.sprint_planner.sprint;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
+@Entity
 public class Sprint {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
 //    @NotNull
+    @Column(name = "name")
     private String username;
     @Size(min = 1,max = 100,message = "Sprint Name must be between 1 and 100 characters")
     private String sprintName;

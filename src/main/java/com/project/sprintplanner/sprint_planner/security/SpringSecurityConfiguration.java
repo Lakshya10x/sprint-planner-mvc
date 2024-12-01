@@ -83,4 +83,40 @@ public class SpringSecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     Configuring spring security to get H2 console working :-
+     Spring Security -> Whenever you go to any URL it's redirecting to the form.
+     By Default ->
+     1. All URls are protected
+     2. A Login form is shown for unauthorized request
+
+     For accessing H2 Console :
+     1. Disable CSRF (Cross-site request forgery)
+     2. H2 also use Frames & spring security by default doesn't allow frames -> Ensure frames are allowed : By disable frame-option
+
+     Interface - SecurityFilterChain -> defines a filter chain matched against every request,
+     which is capable of being matched against a HttpServletRequest() in order to decide whether it applies to that request.
+
+     authorizeHttpRequest -> allows restricting access based on "HttpServletRequest" using "requestMatcher" implementation
+
+     formLogin -> Enable form login, Use all defaults that are associated with form login
+     */
+
+    @Bean
+    public SecurityFilterChain  filterChain(HttpSecurity http) throws Exception {
+        // Ensure that all URLs are protected
+        // Coz we are configuring the security filter chain, we would need to reconfigure this.
+        http.authorizeHttpRequests(
+                auth -> auth.anyRequest().authenticated()
+        );
+
+        http.formLogin(withDefaults());
+        http.csrf(csrf -> csrf.disable());
+//         OR
+//        http.csrf(AbstractHttpConfigurer::disable);
+        http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
+        return http.build();
+    }
+
+
 }
