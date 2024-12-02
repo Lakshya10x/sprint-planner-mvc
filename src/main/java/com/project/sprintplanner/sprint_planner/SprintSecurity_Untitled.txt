@@ -18,3 +18,54 @@ The user we are logging in with spring security is diff from the user we are usi
 -------------------------------------------
 Configure Custom User and Password Encoder  :- SpringSecurityConfiguration class
 
+@Bean
+//    public InMemoryUserDetailsManager createUserDetailsManager()
+//    {
+//        /**
+//            This method withDefaultPasswordEncoder() from the type User is "deprecated"
+//            So typically should not be used, coz "ALL PASSWORD SHOULD IDEALLY BE ENCODED !!"
+//         */
+//        UserDetails userDetails =
+//                User.withDefaultPasswordEncoder()
+//                        .username("ram")
+//                        .password("hanuman")
+//                        .roles("USER","ADMIN")
+//                        .build();
+//
+//        return new InMemoryUserDetailsManager(userDetails);
+//    }
+
+1. This class would contains configuration of a number of spring bean
+        We'll create a number of spring bean and return them back.
+
+        NOTE - Whenever we would want to store username and password -> We would make use of ( LDAP or Database)
+            Simple words -> "In-Memory Configured"
+
+     InMemoryUserDetailsManager ->> public InMemoryUserDetailsManager(UserDetails... users)
+     Where UserDetails is an Interface, so you cannot directly create instance of user details
+     ** Use a builder (User class which can be used to build it)
+        Create a UserDetails object and we would build an InMemoryUserDetailsManager class and return it back.
+
+2.  Implementation of PasswordEncoder that uses the Bcrypt Strong hashing function.
+               Now, Spring Security starts using this PasswordEncoder
+               Hence, when configuring UserDetails, also we need to make use of that specific algorithm(PasswordEncoder)
+               which Spring Security used to encoding the password that we provided to logged in.
+
+3. Configuring spring security to get H2 console working :-
+        Spring Security -> Whenever you go to any URL it's redirecting to the form.
+        By Default ->
+        1. All URls are protected
+        2. A Login form is shown for unauthorized request
+
+        For accessing H2 Console :
+        1. Disable CSRF (Cross-site request forgery)
+        2. H2 also use Frames & spring security by default doesn't allow frames -> Ensure frames are allowed : By disable frame-option
+
+        Interface - SecurityFilterChain -> defines a filter chain matched against every request,
+        which is capable of being matched against a HttpServletRequest() in order to decide whether it applies to that request.
+
+        authorizeHttpRequest -> allows restricting access based on "HttpServletRequest" using "requestMatcher" implementation
+
+        formLogin -> Enable form login, Use all defaults that are associated with form login
+
+4.

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 
-@Service
+//@Service
 public class SprintService {
 
     private static int sprintCount =0;
