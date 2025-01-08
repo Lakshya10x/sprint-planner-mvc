@@ -113,6 +113,122 @@ Original: MyP@ssword123
 Hashed: c04d1a2b93b8fa49c3f8a86e9a7a1d1e6d12c92...
 Even if someone gets the hashed value, they can’t easily reverse it to find the original password.
 
-##Summary:
+### Summary:
 Encoding/Decoding: Changes the format for compatibility, but is reversible.
 Hashing: Secures passwords by making them impossible to reverse, which is what websites usually use for storing passwords.
+
+## Configuring H2 Database Persistence in Spring Boot
+
+By default, Spring Boot configures H2 in **in-memory mode**, meaning all data is lost when the application stops. To make the H2 database persistent, you can switch it to a **file-based mode**.
+
+## Steps to Make H2 Persistent in Spring Boot
+
+### 1. Update `application.properties` 
+
+Configure the H2 database to use file-based storage.
+
+#### For `application.properties`:
+
+```properties
+spring.datasource.url=jdbc:h2:file:~/data/spring_app_db
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+spring.jpa.hibernate.ddl-auto = update
+
+```
+
+### Additional Options for JDBC URL:
+
+- `DB_CLOSE_ON_EXIT=FALSE`: Prevents the database from closing when the application stops.
+- `AUTO_SERVER=TRUE`: Allows multiple connections to the database.
+
+`spring.datasource.url=jdbc:h2:file:~/data/spring_app_db;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE`
+
+## MySQL Database Configuration
+
+### 1. **Database URL**
+- **Property:** `spring.datasource.url`
+- **Description:** Specifies the JDBC URL for the MySQL database connection.
+- **Value:** `jdbc:mysql://localhost:3307/sprints`
+    - `localhost`: Refers to the database host (local machine in this case).
+    - `3307`: The port number where the MySQL server is running.
+    - `sprints`: The name of the database being used.
+
+### 2. **Database Username**
+- **Property:** `spring.datasource.username`
+- **Description:** Defines the username required to connect to the MySQL database.
+- **Value:** `sprints-user`
+
+### 3. **Database Password**
+- **Property:** `spring.datasource.password`
+- **Description:** Specifies the password associated with the database user for authentication.
+- **Value:** `dummysprints`
+
+---
+
+## Hibernate Configuration
+
+### 1. **Hibernate Dialect**
+- **Property:** `spring.jpa.properties.hibernate.dialect`
+- **Description:** Configures the Hibernate dialect to match the database being used. It optimizes Hibernate's SQL generation for the specified database.
+- **Value:** `org.hibernate.dialect.MySQL8Dialect`
+
+### 2. **DDL Auto**
+- **Property:** `spring.jpa.hibernate.ddl-auto`
+- **Description:** Defines how Hibernate should handle database schema updates.
+    - Possible values:
+        - `none`: No action is performed.
+        - `update`: Updates the schema without dropping existing data.
+        - `create`: Drops and creates the schema at startup.
+        - `create-drop`: Drops the schema at startup and shutdown.
+    - **Value in this case:** `update`
+
+---
+
+## Notes
+- Ensure that the MySQL server is running on the specified host and port.
+- Replace the placeholder values for `username` and `password` with the actual credentials in a production environment.
+- Use environment variables or externalized configuration to manage sensitive data like database credentials securely.
+
+## Launch MySQL Using Docker
+
+To run a MySQL database container using Docker, execute the following command:
+
+```bash
+docker run --detach \
+  --env MYSQL_ROOT_PASSWORD=dummypassword \
+  --env MYSQL_USER=sprints-user \
+  --env MYSQL_PASSWORD=dummysprints \
+  --env MYSQL_DATABASE=sprints \
+  --name mysql \
+  --publish 3307:3306 \
+  mysql:8-oracle
+```
+
+### Accessing the Database Using MySQL Shell
+
+### Install MySQL Shell
+Ensure MySQL Shell is installed on your system. Refer to the [MySQL Shell Installation Guide](https://dev.mysql.com/doc/mysql-shell/en/) for installation instructions.
+
+### Connect to the Database
+Use the following command to connect to the MySQL database:
+
+```bash
+\connect sprints-user@localhost:3307
+```
+
+### Select the Database
+Switch to the `sprints` database:
+```bash
+\use sprints
+```
+
+### Query the Database
+Run the following SQL query to fetch data from the sprints table:
+
+```bash
+select * from sprints;
+```

@@ -122,6 +122,10 @@
 		<!-- scope = runtime (Means don't want a database to be available as a part of my jar file)   -->
 		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
 
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+		</dependency>
 
 	</dependencies>
 
