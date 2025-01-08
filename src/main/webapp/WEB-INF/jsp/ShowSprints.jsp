@@ -96,8 +96,7 @@
             <table class="table table-bordered">
                 <thead class="table-light">
                     <tr>
-                        <th class="text-center">ID</th>
-                        <th class="text-center">Username</th>
+                        <th class="text-center">SprintID</th>
                         <th class="text-center">Sprint Name</th>
                         <th class="text-center">Goal</th>
                         <th class="text-center">Start Date</th>
@@ -110,7 +109,6 @@
                     <c:forEach items="${sprints}" var="sprint">
                         <tr>
                             <td class="text-center">${sprint.id}</td>
-                            <td class="text-center">${sprint.username}</td>
                             <td class="text-center">${sprint.sprintName}</td>
                             <td class="text-center">${sprint.goal}</td>
                             <td class="text-center">${sprint.startDate}</td>

@@ -120,6 +120,8 @@
 			<scope>runtime</scope>
 		</dependency>
 		<!-- scope = runtime (Means don't want a database to be available as a part of my jar file)   -->
+		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+
 
 	</dependencies>
 
