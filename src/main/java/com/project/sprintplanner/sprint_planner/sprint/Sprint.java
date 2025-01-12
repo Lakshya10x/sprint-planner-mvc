@@ -1,6 +1,7 @@
 package com.project.sprintplanner.sprint_planner.sprint;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -17,17 +18,33 @@ public class Sprint {
 //    @NotNull
     @Column(name = "name")
     private String username;
+
     @Size(min = 1,max = 100,message = "Sprint Name must be between 1 and 100 characters")
     private String sprintName;
+
     @Size(max = 255, message = "Goal must not exceed 255 characters")
     private String goal;
+
     @NotNull(message = "Date must not be null")
     @FutureOrPresent(message = "Date must be in the present or in future")
     private LocalDate startDate;
+
     @NotNull(message = "Date must not be null")
     @FutureOrPresent(message = "Date must be in the present or in future")
     private LocalDate endDate;
+
     private boolean status;
+
+    @Transient
+    private int displayId;
+
+    public int getDisplayId() {
+        return displayId;
+    }
+
+    public void setDisplayId(int displayId) {
+        this.displayId = displayId;
+    }
 
     public Sprint() {
     }
@@ -110,4 +127,13 @@ public class Sprint {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+    // Custom Validation to ensure endDate is not before startDate
+
+    @AssertTrue(message = "End date must not be earlier than the start date")
+    public boolean isEndDateAfterStartDate()
+    {
+        return !endDate.isBefore(startDate);
+    }
+
 }

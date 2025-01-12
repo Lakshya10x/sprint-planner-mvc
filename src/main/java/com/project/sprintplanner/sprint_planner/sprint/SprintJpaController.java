@@ -28,6 +28,11 @@ public class SprintJpaController {
     {
         String name = getLoggedInUsername(modelMap);
         List<Sprint> sprints = sprintRepo.findByUsername(name);
+        int index=1;
+        for(Sprint s: sprints)
+        {
+            s.setDisplayId(index++);
+        }
         modelMap.addAttribute("sprints",sprints);
         return "ShowSprints";
     }
@@ -42,7 +47,7 @@ public class SprintJpaController {
         return "NewSprint";
     }
     @RequestMapping(value = "add-sprint",method = RequestMethod.POST)
-    public String addNewSprint(ModelMap modelMap, @Valid Sprint sprint, BindingResult result)
+    public String addNewSprint(@Valid Sprint sprint, BindingResult result, ModelMap modelMap)
     {
         if(result.hasErrors())
         {
@@ -70,7 +75,7 @@ public class SprintJpaController {
     }
 
     @RequestMapping(value = "update-sprint", method = RequestMethod.POST)
-    public String updateSprint(ModelMap modelMap,@Valid Sprint sprint, BindingResult result)
+    public String updateSprint(@Valid Sprint sprint, BindingResult result, ModelMap modelMap)
     {
         if(result.hasErrors())
         {

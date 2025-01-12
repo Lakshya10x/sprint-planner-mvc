@@ -119,14 +119,14 @@
 
             <!--StartDate-->
             <fieldset class="form-group mb-3">
-                <label for="startDate">StartDate<span class="text-danger">*</span></label>
+                <label for="startDate">Start Date<span class="text-danger">*</span></label>
                 <form:input path="startDate" class="form-control" id="startDate" name="startDate"/>
                 <form:errors path="startDate" cssClass="text-danger"/>
             </fieldset>
 
             <!--EndDate-->
             <fieldset class="form-group mb-3">
-                <label for="endDate">EndDate<span class="text-danger">*</span></label>
+                <label for="endDate">End Date<span class="text-danger">*</span></label>
                 <form:input path="endDate" class="form-control" id="endDate" name="endDate" />
                 <form:errors path="endDate" cssClass="text-danger"/>
             </fieldset>

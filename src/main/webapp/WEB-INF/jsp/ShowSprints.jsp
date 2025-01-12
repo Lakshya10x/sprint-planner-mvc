@@ -88,7 +88,7 @@
     <%@ include file="common/Navigation.jspf" %>
 
     <div class="container mt-4">
-        <h1>Welcome, ${name}!</h1>
+        <h1>Welcome, ${name} !</h1>
         <p class="text-center">Here is a list of your current sprints:</p>
 
         <!-- Table Container with Scroll -->
@@ -108,7 +108,7 @@
                 <tbody>
                     <c:forEach items="${sprints}" var="sprint">
                         <tr>
-                            <td class="text-center">${sprint.id}</td>
+                            <td class="text-center">${sprint.displayId}</td>
                             <td class="text-center">${sprint.sprintName}</td>
                             <td class="text-center">${sprint.goal}</td>
                             <td class="text-center">${sprint.startDate}</td>
